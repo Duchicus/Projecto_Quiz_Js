@@ -10,6 +10,7 @@ let currentQuestionIndex = -1;
 let InfoGeneralApi
 let puntos = 0  
 
+//Primera funcion la cual escondera el boton "START" y te mostrara las preguntas
 const startGame = infoApi => {
   startButton.classList.add("hide");
   currentQuestionIndex;
