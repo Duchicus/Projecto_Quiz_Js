@@ -1,3 +1,4 @@
+const start = document.getElementById("controls");
 const startButton = document.getElementById("start-btn");
 const nextButton = document.getElementById("next-btn");
 const questionContainerElement = document.getElementById("question-container");
@@ -12,7 +13,7 @@ let puntos = 0
 
 //Primera funcion la cual escondera el boton "START" y te mostrara las preguntas
 const startGame = infoApi => {
-  startButton.classList.add("hide");
+  start.classList.add("hide");
   currentQuestionIndex;
   questionContainerElement.classList.remove("hide");
   setNextQuestion(infoApi, currentQuestionIndex)
@@ -21,7 +22,7 @@ const startGame = infoApi => {
 const showQuestion = (question, currentQuestionIndex) => {
 
     if(currentQuestionIndex < 10){
-      questionElement.innerHTML = `<p style="font-size:40px">¿Quien es?</p><img src=${question[currentQuestionIndex].image}></img`;
+      questionElement.innerHTML = `<p style="font-size:40px">¿Who is?</p><img src=${question[currentQuestionIndex].image}></img`;
       
       console.log(question)
       let only4answers = 0
@@ -59,11 +60,27 @@ const showQuestion = (question, currentQuestionIndex) => {
     });
 
     }else{
+      console.log(currentQuestionIndex)
       questionElement.innerText = ""
       hideresult.classList.remove("hide")
-      results.innerHTML = `<h5 class="card-title">Resultado del Quiz</h5>
-      <p class="card-text">Has obtenido un puntaje de ${puntos}/10 en el quiz.</p>
-      <p class="card-text">Sigue mejorando :)</p>`
+      console.log(results);
+      if(puntos >= 5){
+        hideresult.innerHTML = ` <div class="card">
+          <div id="results" class="card-body">
+          <p style="font-size:40px">YOU WIN!!</p>
+          <img src ="img/rick_morty_celebrate.webp" class="rick_morty"></img>
+          <p style="font-size:40px">${puntos}/10</p>
+          </div>
+          </div>`
+      }else{
+        hideresult.innerHTML = ` <div class="card">
+        <div id="results" class="card-body">
+        <p style="font-size:40px">YOU FAIL!!</p>
+        <img src ="img/rick_morty_dead.jpg" class="rick_morty"></img>
+        <p style="font-size:40px">${puntos}/10</p>
+        </div>
+        </div>`
+      }
     }
   }
 
@@ -79,22 +96,22 @@ const setNextQuestion = infoApi => {
 // Funcion "answers" creada para verificar el estado de los botones, si es correcta o no la respuesta
 // Y llevar un conteo de los puntos recolectados
 const answers = (correct_answer, answer_selected, button) =>{
-        if(answer_selected === correct_answer){
+    if(answer_selected === correct_answer){
 
-            button.classList.add("green")
-            button.classList.add("disable")
-            answerButtonsElement.classList.add("disable")
-            puntos++
-            setTimeout(() => {
-              setNextQuestion(InfoGeneralApi)
-            }, "2000");
-        }else{
-            button.classList.add("red")
-            answerButtonsElement.classList.add("disable")
-            setTimeout(() => {
-              setNextQuestion(InfoGeneralApi)
-            }, "2000");
-        }
+        button.classList.add("green")
+        button.classList.add("disable")
+        answerButtonsElement.classList.add("disable")
+        puntos++
+        setTimeout(() => {
+          setNextQuestion(InfoGeneralApi)
+        }, "2000");
+    }else{
+        button.classList.add("red")
+        answerButtonsElement.classList.add("disable")
+        setTimeout(() => {
+          setNextQuestion(InfoGeneralApi)
+        }, "2000");
+    }
 }
   
 startButton.addEventListener("click", ()=>startGame(InfoGeneralApi));
