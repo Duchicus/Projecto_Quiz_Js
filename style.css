@@ -1,0 +1,60 @@
+.hide{
+    display: none;
+}
+.green{
+    background-color: green;
+}
+.red{
+    background-color: red;
+}
+.disable{
+    pointer-events: none;
+}
+#question-container, #controls{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 20px;
+}
+#question{
+    padding: 50px;
+}
+#answer-buttons {
+    display: flex;
+    flex-wrap: wrap; /* Envuelve los elementos en múltiples líneas */
+    justify-content: center; /* Centra los elementos horizontalmente */
+  }
+  
+#answer-buttons button {
+    margin: 10px; /* Espacio entre los botones */
+    padding: 15px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    color: black; /* Color de texto */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    flex: 1; /* Cada botón ocupará el mismo espacio dentro del contenedor */
+    max-width: calc(50% - 20px); /* Establece el ancho máximo de cada botón */
+}
+  
+#answer-buttons button:hover {
+    background-color: cadetblue; /* Cambia el color de fondo al pasar el mouse */
+}
+body{
+    background-image: url("img/escenario_rickymorty.jpg");
+}
+
+#start-btn{
+    width: 100px;
+}
+#hide-result{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 20px;
+}
