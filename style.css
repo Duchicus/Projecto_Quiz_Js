@@ -23,28 +23,28 @@
 }
 #answer-buttons {
     display: flex;
-    flex-wrap: wrap; /* Envuelve los elementos en múltiples líneas */
-    justify-content: center; /* Centra los elementos horizontalmente */
+    flex-wrap: wrap; 
+    justify-content: center; 
   }
   
 #answer-buttons button {
-    margin: 10px; /* Espacio entre los botones */
+    margin: 10px; 
     padding: 15px 20px;
     font-size: 18px;
     border: none;
     border-radius: 8px;
-    color: black; /* Color de texto */
+    color: black; 
     cursor: pointer;
     transition: background-color 0.3s ease;
-    flex: 1; /* Cada botón ocupará el mismo espacio dentro del contenedor */
-    max-width: calc(50% - 20px); /* Establece el ancho máximo de cada botón */
+    flex: 1; 
+    max-width: calc(50% - 20px); 
 }
   
 #answer-buttons button:hover {
-    background-color: cadetblue; /* Cambia el color de fondo al pasar el mouse */
+    background-color: cadetblue; 
 }
 body{
-    background-image: url("img/escenario_rickymorty.jpg");
+    background-image: url("img/escenario_rickymorty1.jpg");
 }
 
 #start-btn{
