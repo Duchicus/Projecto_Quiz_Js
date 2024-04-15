@@ -97,15 +97,19 @@ const answers = (correct_answer, answer_selected, button) =>{
         }
 }
   
-  
 startButton.addEventListener("click", ()=>startGame(InfoGeneralApi));
 
 // Axio que usaremos con .get para recolectar la informacion de la api
 let randomlink = Math.floor(Math.random() * 20)
-axios.get(`https://rickandmortyapi.com/api/character/?page=${randomlink}`)
-  
- .then((res) => {
+
+async function getElements(){
+  try {
+    res = await axios.get(`https://rickandmortyapi.com/api/character/?page=${randomlink}`)
     InfoGeneralApi = res.data.results
- } )
-      
- .catch((err) => console.error(err));
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+getElements()
+
