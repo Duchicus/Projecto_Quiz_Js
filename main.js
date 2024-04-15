@@ -76,6 +76,8 @@ const setNextQuestion = infoApi => {
     showQuestion(infoApi, currentQuestionIndex);
 }
 
+// Funcion "answers" creada para verificar el estado de los botones, si es correcta o no la respuesta
+// Y llevar un conteo de los puntos recolectados
 const answers = (correct_answer, answer_selected, button) =>{
         if(answer_selected === correct_answer){
 
