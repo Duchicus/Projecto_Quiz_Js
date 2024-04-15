@@ -67,6 +67,8 @@ const showQuestion = (question, currentQuestionIndex) => {
     }
   }
 
+// Funcion "setNextQuestion" creada para darle un valor al bucle que haremos
+// vaciaremos las botones de respuestas y los activaremos
 const setNextQuestion = infoApi => {
     currentQuestionIndex += 1
     answerButtonsElement.innerHTML = ""
