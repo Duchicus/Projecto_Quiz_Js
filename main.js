@@ -10,6 +10,9 @@ const hideresult = document.getElementById("hide-result")
 let currentQuestionIndex = -1;
 let InfoGeneralApi
 let puntos = 0  
+let audio = document.getElementById("audio");
+
+audio.play();
 
 //Primera funcion la cual escondera el boton "START" y te mostrara las preguntas
 const startGame = infoApi => {
