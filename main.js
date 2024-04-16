@@ -6,28 +6,34 @@ const questionElement = document.getElementById("question");
 const answerButtonsElement = document.getElementById("answer-buttons");
 const results = document.getElementById("results")
 const hideresult = document.getElementById("hide-result")
+const nameUser = document.getElementById("username")
+const imgBegin = document.querySelector(".rick_morty")
 
-let currentQuestionIndex = -1;
+let users = JSON.parse(localStorage.getItem("users")) || []
+let currentQuestionIndex = 10;
 let InfoGeneralApi
-let puntos = 0  
+let puntos = 7
 let audio = document.getElementById("audio");
-
 audio.play();
 
 //Primera funcion la cual escondera el boton "START" y te mostrara las preguntas
 const startGame = infoApi => {
-  start.classList.add("hide");
-  currentQuestionIndex;
-  questionContainerElement.classList.remove("hide");
-  setNextQuestion(infoApi, currentQuestionIndex)
+  if(nameUser.value !== ""){
+    start.classList.add("hide");
+    currentQuestionIndex;
+    questionContainerElement.classList.remove("hide");
+    
+    setNextQuestion(infoApi, currentQuestionIndex)
+  }else{
+    imgBegin.setAttribute("src", "img/forgotname.png");
+  }
 }
 
 const showQuestion = (question, currentQuestionIndex) => {
 
     if(currentQuestionIndex < 10){
+
       questionElement.innerHTML = `<p style="font-size:40px">¿Who is this?</p><img src=${question[currentQuestionIndex].image}></img`;
-      
-      console.log(question)
       let only4answers = 0
       let arrayknowrepeatanswers = []
       question.forEach(() => {
@@ -63,16 +69,26 @@ const showQuestion = (question, currentQuestionIndex) => {
     });
 
     }else{
-      console.log(currentQuestionIndex)
+      let user = {
+        name : nameUser.value,
+        puntos : puntos
+      }
+      users.push(user)
+      localStorage.setItem( "users", JSON.stringify(users))
+
+      let arrayUsers = JSON.parse(localStorage.getItem("users"))
+      console.log(arrayUsers);
+
       questionElement.innerText = ""
       hideresult.classList.remove("hide")
-      console.log(results);
+      localStorage.setItem
       if(puntos >= 5){
         hideresult.innerHTML = ` <div class="card">
           <div id="results" class="card-body">
           <p style="font-size:40px">YOU WIN!!</p>
           <img src ="img/rick_morty_celebrate.webp" class="rick_morty"></img>
           <p style="font-size:40px">${puntos}/10</p>
+          <button id="podium" onclick="podium()" class="btn btn-dark mt-2">Podium</button>
           </div>
           </div>`
       }else{
@@ -81,10 +97,11 @@ const showQuestion = (question, currentQuestionIndex) => {
         <p style="font-size:40px">YOU FAIL!!</p>
         <img src ="img/rick_morty_dead.jpg" class="rick_morty"></img>
         <p style="font-size:40px">${puntos}/10</p>
+        <button id="podium" onclick="podium()" class="btn btn-dark mt-2">Podium</button>
         </div>
         </div>`
       }
-    }
+    } 
   }
 
 // Funcion "setNextQuestion" creada para darle un valor al bucle que haremos
@@ -117,6 +134,22 @@ const answers = (correct_answer, answer_selected, button) =>{
           setNextQuestion(InfoGeneralApi)
         }, "2000");
     }
+}
+
+const podium = () => {
+
+
+
+  hideresult.innerHTML = ` <div class="card">
+  <div id="results" class="card-body">
+  <p style="font-size:40px">PODIUM</p>
+  <div>
+    <p></p>
+    <p></p>
+    <p></p>
+  </div>
+  </div>
+  </div>`
 }
   
 startButton.addEventListener("click", ()=>startGame(InfoGeneralApi));

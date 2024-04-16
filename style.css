@@ -81,4 +81,8 @@ body{
 }
 #audio{
     display: none
+
+}
+#username{
+    border-color: black;
 }
