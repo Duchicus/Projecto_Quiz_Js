@@ -22,7 +22,7 @@ const startGame = infoApi => {
 const showQuestion = (question, currentQuestionIndex) => {
 
     if(currentQuestionIndex < 10){
-      questionElement.innerHTML = `<p style="font-size:40px">¿Who is?</p><img src=${question[currentQuestionIndex].image}></img`;
+      questionElement.innerHTML = `<p style="font-size:40px">¿Who is this?</p><img src=${question[currentQuestionIndex].image}></img`;
       
       console.log(question)
       let only4answers = 0
@@ -101,6 +101,7 @@ const answers = (correct_answer, answer_selected, button) =>{
         button.classList.add("green")
         button.classList.add("disable")
         answerButtonsElement.classList.add("disable")
+        
         puntos++
         setTimeout(() => {
           setNextQuestion(InfoGeneralApi)
@@ -108,6 +109,7 @@ const answers = (correct_answer, answer_selected, button) =>{
     }else{
         button.classList.add("red")
         answerButtonsElement.classList.add("disable")
+        
         setTimeout(() => {
           setNextQuestion(InfoGeneralApi)
         }, "2000");
