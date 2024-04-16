@@ -124,7 +124,7 @@ startButton.addEventListener("click", ()=>startGame(InfoGeneralApi));
 // Axio que usaremos con .get para recolectar la informacion de la api
 let randomlink = Math.floor(Math.random() * 20)
 
-async function getElements(){
+const getElements = async()=>{
   try {
     res = await axios.get(`https://rickandmortyapi.com/api/character/?page=${randomlink}`)
     InfoGeneralApi = res.data.results
