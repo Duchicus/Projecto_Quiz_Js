@@ -4,15 +4,17 @@ const nextButton = document.getElementById("next-btn");
 const questionContainerElement = document.getElementById("question-container");
 const questionElement = document.getElementById("question");
 const answerButtonsElement = document.getElementById("answer-buttons");
-const results = document.getElementById("results")
 const hideresult = document.getElementById("hide-result")
 const nameUser = document.getElementById("username")
 const imgBegin = document.querySelector(".rick_morty")
+const calify = document.getElementById("calify")
+const resultscalify = document.getElementById("results-calify")
+
 
 let users = JSON.parse(localStorage.getItem("users")) || []
 let currentQuestionIndex = 10;
 let InfoGeneralApi
-let puntos = 18
+let puntos = 19
 let audio = document.getElementById("audio");
 
 //Primera funcion la cual escondera el boton "START" y te mostrara las preguntas
@@ -113,7 +115,7 @@ const showQuestion = (question, currentQuestionIndex) => {
       localStorage.setItem
       if(puntos >= 5){
         hideresult.innerHTML = ` <div class="card">
-          <div id="results" class="card-body">
+          <div id="results-calify" class="card-body">
           <p style="font-size:40px">YOU WIN!!</p>
           <img src ="img/rick_morty_celebrate.webp" class="rick_morty"></img>
           <p style="font-size:40px">${puntos}/10</p>
@@ -122,7 +124,7 @@ const showQuestion = (question, currentQuestionIndex) => {
           </div>`
       }else{
         hideresult.innerHTML = ` <div class="card">
-        <div id="results" class="card-body">
+        <div id="results-calify" class="card-body">
         <p style="font-size:40px">YOU FAIL!!</p>
         <img src ="img/rick_morty_dead.jpg" class="rick_morty"></img>
         <p style="font-size:40px">${puntos}/10</p>
@@ -167,20 +169,31 @@ const answers = (correct_answer, answer_selected, button) =>{
 
 const podium = () => {
 
-  
-  users.sort((a, b) => a.puntos - b.puntos);
-  console.log(  users.sort((a, b) => a.puntos - b.puntos))
+  users.sort((a, b) => b.puntos - a.puntos);
 
+  first = users[0].name
+  firstpoints = users[0].puntos
+  second = users[1].name
+  secondpoints = users[1].puntos
+  third = users[2].name
+  thirdpoints = users[2].puntos
+
+  
   hideresult.innerHTML = ` <div class="card">
-  <div id="results" class="card-body">
-  <p style="font-size:40px">PODIUM</p>
-  <div>
-    <p></p>
-    <p></p>
-    <p></p>
-  </div>
-  </div>
-  </div>`
+          <div id="results-calify" class="card-body">
+            <p style="font-size:40px">PODIUM</p>
+            <div class="card mb-2" style="background-color: gold;" >
+              <p style="font-size:30px">${first}<p>${firstpoints} points</p></p>
+            </div>
+            <div class="card mb-2" style="background-color: silver;">
+              <p style="font-size:30px">${second}<p>${secondpoints} points</p></p>
+            </div>
+            <div class="card mb-2" style="background-color: #cd7f32;">
+              <p style="font-size:30px">${third}<p>${thirdpoints} points</p></p>
+            </div>
+          </div>
+          </div>`
+
 }
   
 startButton.addEventListener("click", ()=>startGame(InfoGeneralApi));
