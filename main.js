@@ -10,14 +10,14 @@ const nameUser = document.getElementById("username")
 const imgBegin = document.querySelector(".rick_morty")
 
 let users = JSON.parse(localStorage.getItem("users")) || []
-let currentQuestionIndex = -1;
+let currentQuestionIndex = 10;
 let InfoGeneralApi
-let puntos = 0
+let puntos = 5
 let audio = document.getElementById("audio");
-audio.play();
 
 //Primera funcion la cual escondera el boton "START" y te mostrara las preguntas
 const startGame = infoApi => {
+  audio.play();
   if(nameUser.value !== ""){
     start.classList.add("hide");
     currentQuestionIndex;
@@ -91,10 +91,11 @@ const showQuestion = (question, currentQuestionIndex) => {
               users.push(user)
               localStorage.setItem( "users", JSON.stringify(users))
             }
-        }else{
-          users.push(user)
-          localStorage.setItem( "users", JSON.stringify(users))
-        }
+          }else{
+            console.log(users)
+            users.push(user)
+            localStorage.setItem( "users", JSON.stringify(users))
+          }
         }
       
       } 
@@ -158,7 +159,9 @@ const answers = (correct_answer, answer_selected, button) =>{
 
 const podium = () => {
 
-
+  
+  users.sort((a, b) => a.puntos - b.puntos);
+  console.log(  users.sort((a, b) => a.puntos - b.puntos))
 
   hideresult.innerHTML = ` <div class="card">
   <div id="results" class="card-body">
