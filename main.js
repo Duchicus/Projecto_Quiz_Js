@@ -12,7 +12,7 @@ const imgBegin = document.querySelector(".rick_morty")
 let users = JSON.parse(localStorage.getItem("users")) || []
 let currentQuestionIndex = 10;
 let InfoGeneralApi
-let puntos = 5
+let puntos = 18
 let audio = document.getElementById("audio");
 
 //Primera funcion la cual escondera el boton "START" y te mostrara las preguntas
@@ -83,18 +83,26 @@ const showQuestion = (question, currentQuestionIndex) => {
         }
         let arrayUsers = JSON.parse(localStorage.getItem("users"))
         let userNames = arrayUsers.map(user => user.name)
-
+        let iter=0
+        console.log(userNames);
         for (let index = 0; index < arrayUsers.length; index++) {
-          if(userNames.includes(user.name)){
-            if(user.puntos > arrayUsers[index].puntos){
-              users.splice((index), 1)
+          if(userNames.indexOf(user.name) !== -1){
+            if(user.puntos > arrayUsers[userNames.indexOf(user.name)].puntos){
+              while (iter < 1){
+                iter++
+                users.splice((userNames.indexOf(user.name)), 1)
+                users.push(user)
+                localStorage.setItem( "users", JSON.stringify(users))
+                }
+            }
+          }else{
+            while (iter < 1){
+              iter ++
+              console.log(users)
               users.push(user)
               localStorage.setItem( "users", JSON.stringify(users))
             }
-          }else{
-            console.log(users)
-            users.push(user)
-            localStorage.setItem( "users", JSON.stringify(users))
+            
           }
         }
       
