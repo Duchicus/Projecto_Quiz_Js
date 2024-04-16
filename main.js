@@ -10,9 +10,9 @@ const nameUser = document.getElementById("username")
 const imgBegin = document.querySelector(".rick_morty")
 
 let users = JSON.parse(localStorage.getItem("users")) || []
-let currentQuestionIndex = 10;
+let currentQuestionIndex = -1;
 let InfoGeneralApi
-let puntos = 5
+let puntos = 0
 let audio = document.getElementById("audio");
 audio.play();
 
