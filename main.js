@@ -12,7 +12,7 @@ const imgBegin = document.querySelector(".rick_morty")
 let users = JSON.parse(localStorage.getItem("users")) || []
 let currentQuestionIndex = 10;
 let InfoGeneralApi
-let puntos = 7
+let puntos = 5
 let audio = document.getElementById("audio");
 audio.play();
 
@@ -69,15 +69,35 @@ const showQuestion = (question, currentQuestionIndex) => {
     });
 
     }else{
-      let user = {
-        name : nameUser.value,
-        puntos : puntos
-      }
-      users.push(user)
-      localStorage.setItem( "users", JSON.stringify(users))
+      if(users.length === 0){
+        let user = {
+          name : nameUser.value,
+          puntos : puntos
+        }
+        users.push(user)
+        localStorage.setItem( "users", JSON.stringify(users))
+      }else{
+        let user = {
+          name : nameUser.value,
+          puntos : puntos
+        }
+        let arrayUsers = JSON.parse(localStorage.getItem("users"))
+        let userNames = arrayUsers.map(user => user.name)
 
-      let arrayUsers = JSON.parse(localStorage.getItem("users"))
-      console.log(arrayUsers);
+        for (let index = 0; index < arrayUsers.length; index++) {
+          if(userNames.includes(user.name)){
+            if(user.puntos > arrayUsers[index].puntos){
+              users.splice((index), 1)
+              users.push(user)
+              localStorage.setItem( "users", JSON.stringify(users))
+            }
+        }else{
+          users.push(user)
+          localStorage.setItem( "users", JSON.stringify(users))
+        }
+        }
+      
+      } 
 
       questionElement.innerText = ""
       hideresult.classList.remove("hide")
