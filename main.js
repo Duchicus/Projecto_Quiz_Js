@@ -166,7 +166,7 @@ const podium = () => {
   </div>
   </div>`
   const resultsDiv = document.getElementById("results-calify")
-  for (let index = 0; index < 2; index++) {
+  for (let index = 0; index < 3; index++) {
     const user = users[index];
     let first = document.createElement("div");
     first.classList.add("card", "mb-2");
@@ -174,7 +174,7 @@ const podium = () => {
       first.style.backgroundColor = "gold";
     }else if(index === 1){
       first.style.backgroundColor = "silver";
-    }else{
+    }else if(index === 2){
       first.style.backgroundColor = "#cd7f32";
     }
     first.innerHTML = `
