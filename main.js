@@ -12,9 +12,9 @@ const resultscalify = document.getElementById("results-calify")
 
 
 let users = JSON.parse(localStorage.getItem("users")) || []
-let currentQuestionIndex = 10;
+let currentQuestionIndex = -1;
 let InfoGeneralApi
-let puntos = 5
+let puntos = 0
 let audio = document.getElementById("audio");
 
 //Primera funcion la cual escondera el boton "START" y te mostrara las preguntas
@@ -37,14 +37,17 @@ const showQuestion = (question, currentQuestionIndex) => {
       questionElement.innerHTML = `<p style="font-size:40px">¿Who is this?</p><img src=${question[currentQuestionIndex].image}></img`;
       let only4answers = 0
       let arrayknowrepeatanswers = []
+      const positioncorrect = Math.floor(Math.random() * 4)
       question.forEach(() => {
-        if(only4answers < 4){
-         const positioncorrect = Math.floor(Math.random() * 4)
-          if(positioncorrect === only4answers){
+      let unique = 0
+        while(only4answers < 4){
+          if(positioncorrect === only4answers && unique === 0){
+            unique++
             if(arrayknowrepeatanswers.includes(question[currentQuestionIndex].name) === false){
               const buttoncorrect = document.createElement("button");
               buttoncorrect.innerText = question[currentQuestionIndex].name;
               answerButtonsElement.appendChild(buttoncorrect);
+              console.log(question[currentQuestionIndex].name);
               arrayknowrepeatanswers.push(question[currentQuestionIndex].name)
               buttoncorrect.addEventListener("click",()=>answers(question[currentQuestionIndex].name, buttoncorrect.textContent, buttoncorrect))
             }else{
@@ -62,8 +65,8 @@ const showQuestion = (question, currentQuestionIndex) => {
               only4answers--
             }
           }
+          only4answers++
         }
-        only4answers++
     });
     }else{
       if(users.length === 0){
@@ -202,4 +205,5 @@ const getElements = async()=>{
 }
 
 getElements()
+
 
