@@ -30,7 +30,12 @@ const startGame = infoApi => {
     imgBegin.setAttribute("src", "img/forgotname.png");
   }
 }
-
+const setNextQuestion = infoApi => {
+  currentQuestionIndex += 1
+  answerButtonsElement.innerHTML = ""
+  answerButtonsElement.classList.remove("disable")
+  showQuestion(infoApi, currentQuestionIndex);
+}
 const showQuestion = (question, currentQuestionIndex) => {
 
     if(currentQuestionIndex < 10){
@@ -115,6 +120,7 @@ const showQuestion = (question, currentQuestionIndex) => {
           <img src ="img/rick_morty_celebrate.webp" class="rick_morty"></img>
           <p style="font-size:40px">${puntos}/10</p>
           <button id="podium" onclick="podium()" class="btn btn-dark mt-2">Podium</button>
+          <button id="restart" onclick="restart()" class="btn btn-dark mt-2">Reload</button>
           </div>
           </div>`
       }else{
@@ -124,23 +130,12 @@ const showQuestion = (question, currentQuestionIndex) => {
         <img src ="img/rick_morty_dead.jpg" class="rick_morty"></img>
         <p style="font-size:40px">${puntos}/10</p>
         <button id="podium" onclick="podium()" class="btn btn-dark mt-2">Podium</button>
+        <button id="restart" onclick="restart()" class="btn btn-dark mt-2">Reload</button>
         </div>
         </div>`
       }
     } 
   }
-
-// Funcion "setNextQuestion" creada para darle un valor al bucle que haremos
-// vaciaremos las botones de respuestas y los activaremos
-const setNextQuestion = infoApi => {
-    currentQuestionIndex += 1
-    answerButtonsElement.innerHTML = ""
-    answerButtonsElement.classList.remove("disable")
-    showQuestion(infoApi, currentQuestionIndex);
-}
-
-// Funcion "answers" creada para verificar el estado de los botones, si es correcta o no la respuesta
-// Y llevar un conteo de los puntos recolectados
 const answers = (correct_answer, answer_selected, button) =>{
     if(answer_selected === correct_answer){
 
@@ -189,10 +184,13 @@ const podium = () => {
     resultsDiv.appendChild(first);
   }
 }
+
+const restart = () =>{
+  window.location.href = "index.html"
+}
   
 startButton.addEventListener("click", ()=>startGame(InfoGeneralApi));
 
-// Axio que usaremos con .get para recolectar la informacion de la api
 let randomlink = Math.floor(Math.random() * 20)
 
 const getElements = async()=>{
