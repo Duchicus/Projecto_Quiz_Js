@@ -14,7 +14,7 @@ const resultscalify = document.getElementById("results-calify")
 let users = JSON.parse(localStorage.getItem("users")) || []
 let currentQuestionIndex = 10;
 let InfoGeneralApi
-let puntos = 19
+let puntos = 5
 let audio = document.getElementById("audio");
 
 //Primera funcion la cual escondera el boton "START" y te mostrara las preguntas
@@ -34,16 +34,13 @@ const startGame = infoApi => {
 const showQuestion = (question, currentQuestionIndex) => {
 
     if(currentQuestionIndex < 10){
-
       questionElement.innerHTML = `<p style="font-size:40px">¿Who is this?</p><img src=${question[currentQuestionIndex].image}></img`;
       let only4answers = 0
       let arrayknowrepeatanswers = []
       question.forEach(() => {
         if(only4answers < 4){
          const positioncorrect = Math.floor(Math.random() * 4)
-
           if(positioncorrect === only4answers){
-
             if(arrayknowrepeatanswers.includes(question[currentQuestionIndex].name) === false){
               const buttoncorrect = document.createElement("button");
               buttoncorrect.innerText = question[currentQuestionIndex].name;
@@ -53,7 +50,6 @@ const showQuestion = (question, currentQuestionIndex) => {
             }else{
               only4answers--
             }
-            
           }else{
             const randomnumber = Math.floor(Math.random() * 10);
             if(arrayknowrepeatanswers.includes(question[randomnumber].name) === false){
@@ -69,7 +65,6 @@ const showQuestion = (question, currentQuestionIndex) => {
         }
         only4answers++
     });
-
     }else{
       if(users.length === 0){
         let user = {
@@ -103,13 +98,10 @@ const showQuestion = (question, currentQuestionIndex) => {
               console.log(users)
               users.push(user)
               localStorage.setItem( "users", JSON.stringify(users))
-            }
-            
+            }   
           }
         }
-      
       } 
-
       questionElement.innerText = ""
       hideresult.classList.remove("hide")
       localStorage.setItem
@@ -170,30 +162,29 @@ const answers = (correct_answer, answer_selected, button) =>{
 const podium = () => {
 
   users.sort((a, b) => b.puntos - a.puntos);
-
-  first = users[0].name
-  firstpoints = users[0].puntos
-  second = users[1].name
-  secondpoints = users[1].puntos
-  third = users[2].name
-  thirdpoints = users[2].puntos
-
-  
   hideresult.innerHTML = ` <div class="card">
-          <div id="results-calify" class="card-body">
-            <p style="font-size:40px">PODIUM</p>
-            <div class="card mb-2" style="background-color: gold;" >
-              <p style="font-size:30px">${first}<p>${firstpoints} points</p></p>
-            </div>
-            <div class="card mb-2" style="background-color: silver;">
-              <p style="font-size:30px">${second}<p>${secondpoints} points</p></p>
-            </div>
-            <div class="card mb-2" style="background-color: #cd7f32;">
-              <p style="font-size:30px">${third}<p>${thirdpoints} points</p></p>
-            </div>
-          </div>
-          </div>`
-
+  <div id="results-calify" class="card-body">
+    <p style="font-size:40px">PODIUM</p>
+  </div>
+  </div>`
+  const resultsDiv = document.getElementById("results-calify")
+  for (let index = 0; index < 2; index++) {
+    const user = users[index];
+    let first = document.createElement("div");
+    first.classList.add("card", "mb-2");
+    if(index === 0){
+      first.style.backgroundColor = "gold";
+    }else if(index === 1){
+      first.style.backgroundColor = "silver";
+    }else{
+      first.style.backgroundColor = "#cd7f32";
+    }
+    first.innerHTML = `
+      <p style="font-size:30px">${user.name}</p>
+      <p>${user.puntos} points</p>
+    `;
+    resultsDiv.appendChild(first);
+  }
 }
   
 startButton.addEventListener("click", ()=>startGame(InfoGeneralApi));
