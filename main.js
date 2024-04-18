@@ -14,9 +14,9 @@ let minutes
 let seconds
 let time = 0
 let users = JSON.parse(localStorage.getItem("users")) || []
-let currentQuestionIndex = 10
+let currentQuestionIndex = -1
 let InfoGeneralApi
-let points = 5
+let points = 0
 let music = document.getElementById("music");
 let audio = document.getElementById("audio");
 
