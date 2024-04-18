@@ -1,6 +1,4 @@
-# README del Juego de Quiz de Rick y Morty![image](https://github.com/Duchicus/Projecto_Quiz_Js/assets/145117344/36d733cd-bf18-4e8c-8653-f8c1a558d3c7)
-
-
+# README del Juego de Quiz de Rick y Morty![icons8-rick-sanchez-100](https://github.com/Duchicus/Projecto_Quiz_Js/assets/145117344/3cb99201-0d25-487c-bab4-7c328d516cc6)
 
 Este repositorio contiene un juego de quiz desarrollado utilizando HTML, CSS y JavaScript. El juego está basado en la serie de televisión animada "Rick y Morty" y desafía a los jugadores a identificar personajes de la serie.
 
