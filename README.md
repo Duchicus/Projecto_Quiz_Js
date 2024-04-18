@@ -12,6 +12,9 @@ Este repositorio contiene un juego de quiz desarrollado utilizando HTML, CSS y J
 ![image](https://github.com/Duchicus/Projecto_Quiz_Js/assets/145117344/61b9f9d5-e303-4ce6-9ffa-5083d748fc8c)
 
 - **Botones de Respuesta:** Los jugadores seleccionan su respuesta entre opciones de opción múltiple presentadas como botones.
+
+  ![image](https://github.com/Duchicus/Projecto_Quiz_Js/assets/145117344/c9517c9a-e4e0-476f-b745-f0d7e3ebb690)
+
 - **Puntuación:** Los jugadores obtienen puntos por cada respuesta correcta.
 - **Resultados:** Después de responder todas las preguntas, los jugadores reciben su puntuación final y se les informa si ganaron o perdieron.
 - **Podio:** Los jugadores pueden ver el podio para ver a los mejores puntajes.
