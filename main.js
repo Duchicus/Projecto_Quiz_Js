@@ -173,7 +173,10 @@ const restartload = () =>{
 }
 const answers = (correct_answer, answer_selected, button) =>{
     if(answer_selected === correct_answer){
-
+        for (let opcion of  answerButtonsElement.childNodes) {
+          opcion.classList.add("red")
+        }
+        button.classList.remove("red")
         button.classList.add("green")
         button.classList.add("disable")
         answerButtonsElement.classList.add("disable")
@@ -183,7 +186,13 @@ const answers = (correct_answer, answer_selected, button) =>{
           setNextQuestion(InfoGeneralApi)
         }, "2000");
     }else{
-        button.classList.add("red")
+        for (let opcion of  answerButtonsElement.childNodes) {
+          if(opcion.textContent === correct_answer){
+            opcion.classList.add("green")
+          }else{
+            opcion.classList.add("red")
+          }
+        }
         answerButtonsElement.classList.add("disable")
         
         setTimeout(() => {
