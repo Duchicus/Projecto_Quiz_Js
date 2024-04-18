@@ -10,7 +10,9 @@ const imgBegin = document.querySelector(".rick_morty")
 const calify = document.getElementById("calify")
 const resultscalify = document.getElementById("results-calify")
 
-
+let minutes
+let seconds
+let time = 0
 let users = JSON.parse(localStorage.getItem("users")) || []
 let currentQuestionIndex = -1;
 let InfoGeneralApi
@@ -19,6 +21,8 @@ let audio = document.getElementById("audio");
 
 //Primera funcion la cual escondera el boton "START" y te mostrara las preguntas
 const startGame = infoApi => {
+  minutes = new Date().getMinutes()
+  seconds = new Date().getSeconds()
   audio.play();
   if(nameUser.value !== ""){
     start.classList.add("hide");
@@ -74,17 +78,24 @@ const showQuestion = (question, currentQuestionIndex) => {
         }
     });
     }else{
+      let minutesfinals = new Date().getMinutes()
+      let secondsfinals = new Date().getSeconds()
+      let resulttiempo = (minutes * 60) + seconds
+      let resulttiempo2 = (minutesfinals * 60) + secondsfinals
+      time = resulttiempo2 - resulttiempo
       if(users.length === 0){
         let user = {
           name : nameUser.value,
-          puntos : puntos
+          puntos : puntos,
+          tiempo : `${time} seconds`
         }
         users.push(user)
         localStorage.setItem( "users", JSON.stringify(users))
       }else{
         let user = {
           name : nameUser.value,
-          puntos : puntos
+          puntos : puntos,
+          tiempo : `${time} seconds`
         }
         let arrayUsers = JSON.parse(localStorage.getItem("users"))
         let userNames = arrayUsers.map(user => user.name)
@@ -179,7 +190,7 @@ const podium = () => {
     }
     first.innerHTML = `
       <p style="font-size:30px">${user.name}</p>
-      <p>${user.puntos} points</p>
+      <p>${user.puntos} points  - ${time} seconds</p>
     `;
     resultsDiv.appendChild(first);
   }
@@ -203,5 +214,6 @@ const getElements = async()=>{
 }
 
 getElements()
+
 
 
