@@ -14,16 +14,18 @@ let minutes
 let seconds
 let time = 0
 let users = JSON.parse(localStorage.getItem("users")) || []
-let currentQuestionIndex = -1;
+let currentQuestionIndex = 10
 let InfoGeneralApi
-let puntos = 0
+let points = 5
+let music = document.getElementById("music");
 let audio = document.getElementById("audio");
+
 
 //Primera funcion la cual escondera el boton "START" y te mostrara las preguntas
 const startGame = infoApi => {
   minutes = new Date().getMinutes()
   seconds = new Date().getSeconds()
-  audio.play();
+  music.play();
   if(nameUser.value !== ""){
     start.classList.add("hide");
     currentQuestionIndex;
@@ -80,41 +82,48 @@ const showQuestion = (question, currentQuestionIndex) => {
     }else{
       let minutesfinals = new Date().getMinutes()
       let secondsfinals = new Date().getSeconds()
-      let resulttiempo = (minutes * 60) + seconds
-      let resulttiempo2 = (minutesfinals * 60) + secondsfinals
-      time = resulttiempo2 - resulttiempo
+      let resulttime = (minutes * 60) + seconds
+      let resulttime2 = (minutesfinals * 60) + secondsfinals
+      time = resulttime2 - resulttime
       if(users.length === 0){
         let user = {
           name : nameUser.value,
-          puntos : puntos,
-          tiempo : `${time} seconds`
+          points : points,
+          time : time
         }
         users.push(user)
         localStorage.setItem( "users", JSON.stringify(users))
       }else{
         let user = {
           name : nameUser.value,
-          puntos : puntos,
-          tiempo : `${time} seconds`
+          points : points,
+          time : time
         }
         let arrayUsers = JSON.parse(localStorage.getItem("users"))
         let userNames = arrayUsers.map(user => user.name)
         let iter=0
-        console.log(userNames);
         for (let index = 0; index < arrayUsers.length; index++) {
           if(userNames.indexOf(user.name) !== -1){
-            if(user.puntos > arrayUsers[userNames.indexOf(user.name)].puntos){
+            if(user.points > arrayUsers[userNames.indexOf(user.name)].points){
               while (iter < 1){
                 iter++
                 users.splice((userNames.indexOf(user.name)), 1)
                 users.push(user)
                 localStorage.setItem( "users", JSON.stringify(users))
                 }
+            }else if(user.points === arrayUsers[userNames.indexOf(user.name)].points){
+              if(user.time < arrayUsers[userNames.indexOf(user.name)].time){
+                while (iter < 1){
+                  iter++
+                  users.splice((userNames.indexOf(user.name)), 1)
+                  users.push(user)
+                  localStorage.setItem( "users", JSON.stringify(users))
+                  }
+              }
             }
           }else{
             while (iter < 1){
               iter ++
-              console.log(users)
               users.push(user)
               localStorage.setItem( "users", JSON.stringify(users))
             }   
@@ -124,29 +133,43 @@ const showQuestion = (question, currentQuestionIndex) => {
       questionElement.innerText = ""
       hideresult.classList.remove("hide")
       localStorage.setItem
-      if(puntos >= 5){
+      music.pause()
+      music.currentTime = 0;
+      if(points >= 5){
         hideresult.innerHTML = ` <div class="card">
-          <div id="results-calify" class="card-body">
-          <p style="font-size:40px">YOU WIN!!</p>
-          <img src ="img/rick_morty_celebrate.webp" class="rick_morty"></img>
-          <p style="font-size:40px">${puntos}/10</p>
-          <button id="podium" onclick="podium()" class="btn btn-dark mt-2">Podium</button>
-          <button id="restart" onclick="restart()" class="btn btn-dark mt-2">Reload</button>
-          </div>
-          </div>`
+        <div id="results-calify" class="card-body">
+        <p style="font-size:40px">YOU WIN!!</p>
+        <img src ="img/rick_morty_celebrate.webp" class="rick_morty"></img>
+        <p style="font-size:40px">${points}/10</p>
+        <button id="podium" onclick="podiumload()" class="btn btn-dark mt-2">Podium</button>
+        <button id="restart" onclick="restartload()" class="btn btn-dark mt-2">Reload</button>
+        </div>
+        </div>`
       }else{
         hideresult.innerHTML = ` <div class="card">
         <div id="results-calify" class="card-body">
         <p style="font-size:40px">YOU FAIL!!</p>
         <img src ="img/rick_morty_dead.jpg" class="rick_morty"></img>
-        <p style="font-size:40px">${puntos}/10</p>
-        <button id="podium" onclick="podium()" class="btn btn-dark mt-2">Podium</button>
-        <button id="restart" onclick="restart()" class="btn btn-dark mt-2">Reload</button>
+        <p style="font-size:40px">${points}/10</p>
+        <button id="podium" onclick="podiumload()" class="btn btn-dark mt-2">Podium</button>
+        <button id="restart" onclick="restartload()" class="btn btn-dark mt-2">Reload</button>
         </div>
         </div>`
       }
     } 
   }
+const podiumload = () =>{
+  audio.play()
+  setTimeout(() => {
+      podium()
+  }, "4000");
+}
+const restartload = () =>{
+  audio.play()
+  setTimeout(() => {
+      restart()
+  }, "4000");
+}
 const answers = (correct_answer, answer_selected, button) =>{
     if(answer_selected === correct_answer){
 
@@ -154,7 +177,7 @@ const answers = (correct_answer, answer_selected, button) =>{
         button.classList.add("disable")
         answerButtonsElement.classList.add("disable")
         
-        puntos++
+        points++
         setTimeout(() => {
           setNextQuestion(InfoGeneralApi)
         }, "2000");
@@ -170,12 +193,21 @@ const answers = (correct_answer, answer_selected, button) =>{
 
 const podium = () => {
 
-  users.sort((a, b) => b.puntos - a.puntos);
+  users.sort(function (a,b){
+    if (b.points > a.points) return 1;
+    if (b.points < a.points) return -1;
+
+    if (b.time < a.time) return 1;
+    if (b.time > a.time) return -1;
+  })
+
   hideresult.innerHTML = ` <div class="card">
   <div id="results-calify" class="card-body">
     <p style="font-size:40px">PODIUM</p>
   </div>
+  <div><button id="restart" onclick="restart()" class="btn btn-dark" style="width:100px;">Reload</button></div>
   </div>`
+  
   const resultsDiv = document.getElementById("results-calify")
   for (let index = 0; index < 3; index++) {
     const user = users[index];
@@ -190,7 +222,7 @@ const podium = () => {
     }
     first.innerHTML = `
       <p style="font-size:30px">${user.name}</p>
-      <p>${user.puntos} points  - ${time} seconds</p>
+      <p>${user.points} points  - ${user.time} seconds</p>
     `;
     resultsDiv.appendChild(first);
   }
