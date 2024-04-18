@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Jersey+10+Charted&display=swap" rel="stylesheet">
@@ -12,12 +11,12 @@
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="Web/icons8-rick-sanchez-color-hand-drawn-32.png" />
     <title>Quiz Rick&Morty</title>
+    
 </head>
 <body>
-    <audio id="audio" controls>
-    <source type="audio/wav" src="music/1 hour of Rick and Morty theme (Perfect looped 128 times).mp3">
-    </audio>
-    <div id="question-container" class="hide">
+    <audio id="music" controls><source type="audio/wav" src="music/1 hour of Rick and Morty theme (Perfect looped 128 times).mp3"></audio>
+    <audio id="audio" controls><source type="audio/wav" src="music/careful-guys-youre-going-to-burn-up-the-cpu-with-this-one-101soundboards.mp3"></audio>
+        <div id="question-container" class="hide">
         <div id="question">Question</div>
   
         <div id="answer-buttons"></div>
@@ -38,6 +37,7 @@
         <div id="results-calify" class="card-body">
         <p style="font-size:40px">PODIUM</p>
         <p id="calify"></p>
+        <img id="failimage" style="width:300px; margin-top:80px" alt="Fail Image">
         </div>
       </div>
     </div>
