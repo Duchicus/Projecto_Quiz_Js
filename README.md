@@ -4,7 +4,7 @@ Este repositorio contiene un juego de quiz desarrollado utilizando HTML, CSS y J
 
 ## Características
 - **Botón de Inicio:** Al hacer clic en el botón "START" comienza el juego.
-  ![image](https://github.com/Duchicus/Projecto_Quiz_Js/assets/145117344/8f865cf2-eabe-495a-8cf9-c29590d0b21e)
+-  ![image](https://github.com/Duchicus/Projecto_Quiz_Js/assets/145117344/8f865cf2-eabe-495a-8cf9-c29590d0b21e)
 
 - **Preguntas:** El juego presenta una serie de preguntas, cada una mostrando una imagen de un personaje de "Rick y Morty".
 - **Botones de Respuesta:** Los jugadores seleccionan su respuesta entre opciones de opción múltiple presentadas como botones.
