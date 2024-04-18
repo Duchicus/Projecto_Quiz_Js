@@ -25,6 +25,7 @@ let audio = document.getElementById("audio");
 const startGame = infoApi => {
   minutes = new Date().getMinutes()
   seconds = new Date().getSeconds()
+  music.volume = 0.5
   music.play();
   if(nameUser.value !== ""){
     start.classList.add("hide");
