@@ -30,7 +30,6 @@ const startGame = infoApi => {
   music.play();
   if(nameUser.value !== ""){
     start.classList.add("hide");
-    currentQuestionIndex;
     questionContainerElement.classList.remove("hide");
     
     setNextQuestion(infoApi, currentQuestionIndex)
@@ -60,7 +59,6 @@ const showQuestion = (question, currentQuestionIndex) => {
               const buttoncorrect = document.createElement("button");
               buttoncorrect.innerText = question[currentQuestionIndex].name;
               answerButtonsElement.appendChild(buttoncorrect);
-              console.log(question[currentQuestionIndex].name);
               arrayknowrepeatanswers.push(question[currentQuestionIndex].name)
               buttoncorrect.addEventListener("click",()=>answers(question[currentQuestionIndex].name, buttoncorrect.textContent, buttoncorrect))
             }else{
@@ -134,7 +132,6 @@ const showQuestion = (question, currentQuestionIndex) => {
       } 
       questionElement.innerText = ""
       hideresult.classList.remove("hide")
-      localStorage.setItem
       music.pause()
       music.currentTime = 0;
       if(points >= 5){
